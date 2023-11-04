@@ -157,6 +157,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Model\TestBoard.cpp" />
+    <ClCompile Include="Model\TestCell.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\codi\codi.vcxproj">
