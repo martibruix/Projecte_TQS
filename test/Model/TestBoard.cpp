@@ -16,24 +16,10 @@ public:
 		Board tauler(8,7,5);
 		Assert::AreEqual(tauler.getAmplada(), 7);
 	}
-	TEST_METHOD(test_getSubjacents)
-	{
-		Board tauler(8,7,7);
-		vector<vector <int>> matriu = tauler.getSubjacents();
-		Assert::AreEqual(int(matriu.size()), 8);
-		Assert::AreEqual(int(matriu[0].size()), 7);
-	}
 	TEST_METHOD(test_getMatriu)
 	{
 		Board tauler(8,7,7);
-		vector<vector <int>> matriu = tauler.getMatriu();
-		Assert::AreEqual(int(matriu.size()), 8);
-		Assert::AreEqual(int(matriu[0].size()), 7);
-	}
-	TEST_METHOD(test_getPartida)
-	{
-		Board tauler(8,7,7);
-		vector<vector <int>> matriu = tauler.getPartida();
+		vector<vector <Cell>> matriu = tauler.getMatriu();
 		Assert::AreEqual(int(matriu.size()), 8);
 		Assert::AreEqual(int(matriu[0].size()), 7);
 	}

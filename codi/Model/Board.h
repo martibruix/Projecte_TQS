@@ -1,4 +1,5 @@
 #include <vector>
+#include "Cell.h"
 using namespace std;
 
 class Board
@@ -14,17 +15,10 @@ public:
             altura = alt;
             amplada = amp;
         }
-        subjacents.resize(altura);
-        for (int i = 0; i < altura; i++)
-            subjacents[i].resize(amplada);
 
         matriu.resize(altura);
         for (int i = 0; i < altura; i++)
             matriu[i].resize(amplada);
-
-        partida.resize(altura);
-        for (int i = 0; i < altura; i++)
-            partida[i].resize(amplada);
 
         flags = min;
         mines = min;
@@ -32,9 +26,7 @@ public:
 	~Board() {};
     int getAltura() { return altura; };
 	int getAmplada() { return amplada; };
-	vector<vector <int>> getSubjacents() { return subjacents; };
-	vector<vector <int>> getMatriu() { return matriu; };
-	vector<vector <int>> getPartida() { return partida; };
+    vector<vector <Cell>> getMatriu() { return matriu; }
     int getMines() { return mines; }
     int getFlags() { return flags; }
     void crearMines();
@@ -43,9 +35,7 @@ public:
     void treureFlags();
     void obrirCasella();
 private:
-	vector<vector <int>> subjacents;
-	vector<vector <int>> matriu;
-	vector<vector <int>> partida;
+    vector<vector <Cell>> matriu;
 	int altura, amplada;
     int mines;
     int flags;
