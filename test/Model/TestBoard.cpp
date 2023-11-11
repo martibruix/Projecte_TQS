@@ -33,4 +33,18 @@ public:
 		Board tauler(10,8,8);
 		Assert::AreEqual(tauler.getFlags(), 8);
 	}
+	TEST_METHOD(test_constructorBoard)
+	{
+		Board tauler1(-5, 5, 5);
+		Assert::IsTrue(tauler1.getAltura() > 0);
+
+		Board tauler2(5, -5, 5);
+		Assert::IsTrue(tauler2.getAmplada() > 0);
+
+		Board tauler3(5, 5, -5);
+		Assert::IsTrue(tauler3.getMines() > 0);
+
+		Board tauler4(5, 5, 30);
+		Assert::IsTrue(tauler4.getMines() <= tauler4.getAmplada() * tauler4.getAltura());
+	}
 };

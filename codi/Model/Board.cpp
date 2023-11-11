@@ -8,14 +8,14 @@ void Board::calculSubjacents(){
 
 };
 
-void Board::posarFlags() {
-
+int Board::posarFlags(int x, int y) {
+	return 0;
 };
 
-void Board::treureFlags(){
-
+int Board::treureFlags(int x, int y){
+	return 0;
 };
 
-void Board::obrirCasella(){
-
+int Board::obrirCasella(int x, int y){
+	return 0;
 };

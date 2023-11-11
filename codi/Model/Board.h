@@ -5,23 +5,25 @@ using namespace std;
 class Board
 {
 public:
-	Board() { altura = 2; amplada = 2; mines = 2; flags = 2; };
     Board(int alt, int amp, int min) {
-        if (alt <= 0 || amp <= 0) {
-            altura = 1;
-            amplada = 1;
+        if (alt <= 0 || amp <= 0 || min < 0 || alt*amp < min) {
+            altura = 2;
+            amplada = 2;
+            flags = 2;
+            mines = 2;
+            matriu.resize(2);
+            for (int i = 0; i < 2; i++)
+                matriu[i].resize(2);
         }
         else {
             altura = alt;
             amplada = amp;
+            flags = min;
+            mines = min;
+            matriu.resize(altura);
+            for (int i = 0; i < altura; i++)
+                matriu[i].resize(amplada);
         }
-
-        matriu.resize(altura);
-        for (int i = 0; i < altura; i++)
-            matriu[i].resize(amplada);
-
-        flags = min;
-        mines = min;
     };
 	~Board() {};
     int getAltura() { return altura; };
@@ -31,9 +33,9 @@ public:
     int getFlags() { return flags; }
     void crearMines();
     void calculSubjacents();
-    void posarFlags();
-    void treureFlags();
-    void obrirCasella();
+    int posarFlags(int x, int y);
+    int treureFlags(int x, int y);
+    int obrirCasella(int x, int y);
 private:
     vector<vector <Cell>> matriu;
 	int altura, amplada;
