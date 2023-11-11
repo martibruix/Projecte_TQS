@@ -27,11 +27,21 @@ public:
         }
     };
 	~Board() {};
+
     int getAltura() { return altura; };
 	int getAmplada() { return amplada; };
     vector<vector <Cell>> getMatriu() { return matriu; }
     int getMines() { return mines; }
     int getFlags() { return flags; }
+
+    int setMatriu(vector<vector <Cell>> mat) {
+        if (mat.size() == altura && mat[0].size() == amplada) {
+            matriu = mat;
+            return 0;
+        }
+        return -1;
+    };
+
     void crearMines() {
         int num_mines = 0;
         srand(time(0));

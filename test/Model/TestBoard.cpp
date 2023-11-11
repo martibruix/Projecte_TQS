@@ -59,4 +59,33 @@ public:
 					num_mines++;
 		Assert::AreEqual(num_mines, 8);
 	}
+	TEST_METHOD(test_setMatriu)
+	{
+		vector<vector<Cell>> matriu = {
+			{Cell(1, 0, 0, 0), Cell(0, 0, 0, 5), Cell(0, 1, 0, 0)},
+			{Cell(0, 0, 0, 3), Cell(0, 0, 1, 0), Cell(0, 1, 0, 7)},
+			{Cell(1, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 0)}
+		};
+
+		Board tauler(3, 3, 3);
+		int error = tauler.setMatriu(matriu);
+		Assert::AreEqual(error, 0);
+		vector<vector<Cell>> matriu_board = tauler.getMatriu();
+		for (int i = 0; i < matriu.size(); i++) {
+			for (int j = 0; j < matriu[i].size(); j++) {
+				Assert::AreEqual(matriu_board[i][j].esMina(), matriu[i][j].esMina());
+				Assert::AreEqual(matriu_board[i][j].estaOberta(), matriu[i][j].estaOberta());
+				Assert::AreEqual(matriu_board[i][j].teFlag(), matriu[i][j].teFlag());
+				Assert::AreEqual(matriu_board[i][j].getSubjacents(), matriu[i][j].getSubjacents());
+			}
+		}
+
+		Board tauler2(2, 2, 3);
+		error = tauler2.setMatriu(matriu);
+		Assert::AreEqual(error, -1);
+
+		Board tauler3(4, 4, 3);
+		error = tauler3.setMatriu(matriu);
+		Assert::AreEqual(error, -1);
+	}
 };
