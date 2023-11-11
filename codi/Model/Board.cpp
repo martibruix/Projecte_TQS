@@ -1,9 +1,5 @@
 #include "Board.h"
 
-void Board::crearMines(){
-
-};
-
 void Board::calculSubjacents(){
 
 };

@@ -1,4 +1,5 @@
 #include <vector>
+#include <time.h>
 #include "Cell.h"
 using namespace std;
 
@@ -31,7 +32,20 @@ public:
     vector<vector <Cell>> getMatriu() { return matriu; }
     int getMines() { return mines; }
     int getFlags() { return flags; }
-    void crearMines();
+    void crearMines() {
+        int num_mines = 0;
+        srand(time(0));
+
+        while (num_mines != mines) {
+            int x = rand() % altura;
+            int y = rand() % amplada;
+
+            if (!matriu[x][y].esMina()) {
+                matriu[x][y].setMina();
+                num_mines++;
+            }
+        }
+    }
     void calculSubjacents();
     int posarFlags(int x, int y);
     int treureFlags(int x, int y);

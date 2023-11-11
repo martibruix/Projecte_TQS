@@ -47,4 +47,16 @@ public:
 		Board tauler4(5, 5, 30);
 		Assert::IsTrue(tauler4.getMines() <= tauler4.getAmplada() * tauler4.getAltura());
 	}
+	TEST_METHOD(test_crearMines)
+	{
+		Board tauler(8, 8, 8);
+		tauler.crearMines();
+		vector<vector<Cell>> matriu = tauler.getMatriu();
+		int num_mines = 0;
+		for (int i = 0; i < matriu.size(); i++)
+			for (int j = 0; j < matriu[i].size(); j++)
+				if (matriu[i][j].esMina())
+					num_mines++;
+		Assert::AreEqual(num_mines, 8);
+	}
 };
