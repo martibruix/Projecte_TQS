@@ -118,4 +118,13 @@ public:
 				Assert::AreEqual(matriu_esperada[i][j].getSubjacents(), matriu_board[i][j].getSubjacents(), message.c_str());
 			}
 	}
+	TEST_METHOD(test_posarFlags)
+	{
+		Board tauler(8, 8, 8);
+		int error = tauler.posarFlags(3, 5);
+		Assert::AreEqual(error, 0);
+		vector<vector<Cell>> matriu = tauler.getMatriu();
+		Assert::AreEqual(matriu[3][5].teFlag(), true);
+		Assert::AreEqual(tauler.getFlags(), 7);
+	}
 };

@@ -98,7 +98,11 @@ public:
             }
         }
     };
-    int posarFlags(int x, int y);
+    int posarFlags(int x, int y) {
+        matriu[x][y].setFlag();
+        flags--;
+        return 0;
+    };
     int treureFlags(int x, int y);
     int obrirCasella(int x, int y);
 private:
