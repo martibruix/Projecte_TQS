@@ -7,7 +7,7 @@ class Board
 {
 public:
     Board(int alt, int amp, int min) {
-        if (alt <= 0 || amp <= 0 || min < 0 || alt*amp < min) {
+        if (alt <= 0 || amp <= 0 || min <= 0 || alt*amp < min) {
             altura = 2;
             amplada = 2;
             flags = 2;
@@ -25,8 +25,8 @@ public:
             for (int i = 0; i < altura; i++)
                 matriu[i].resize(amplada);
         }
-    };
-	~Board() {};
+    }
+	~Board() {}
 
     int getAltura() { return altura; };
 	int getAmplada() { return amplada; };
@@ -40,7 +40,7 @@ public:
             return 0;
         }
         return -1;
-    };
+    }
 
     void crearMines() {
         int num_mines = 0;
@@ -97,14 +97,20 @@ public:
                 }
             }
         }
-    };
+    }
     int posarFlags(int x, int y) {
+        if (x < 0 || x >= altura || y < 0 || y >= amplada || flags == 0 || matriu[x][y].teFlag() || matriu[x][y].estaOberta())
+            return -1;
         matriu[x][y].setFlag();
         flags--;
         return 0;
-    };
-    int treureFlags(int x, int y);
-    int obrirCasella(int x, int y);
+    }
+    int treureFlags(int x, int y) {
+        return 0;
+    }
+    int obrirCasella(int x, int y) {
+        return 0;
+    }
 private:
     vector<vector <Cell>> matriu;
 	int altura, amplada;

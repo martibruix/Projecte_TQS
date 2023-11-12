@@ -120,11 +120,111 @@ public:
 	}
 	TEST_METHOD(test_posarFlags)
 	{
+		// cas bàsic
 		Board tauler(8, 8, 8);
 		int error = tauler.posarFlags(3, 5);
 		Assert::AreEqual(error, 0);
 		vector<vector<Cell>> matriu = tauler.getMatriu();
 		Assert::AreEqual(matriu[3][5].teFlag(), true);
 		Assert::AreEqual(tauler.getFlags(), 7);
+
+		// valors límit/frontera d'altura
+		Board tauler2(8, 8, 8);
+		error = tauler2.posarFlags(-1, 5);
+		Assert::AreEqual(error, -1);
+		Assert::AreEqual(tauler2.getFlags(), 8);
+
+		Board tauler3(8, 8, 8);
+		error = tauler3.posarFlags(0, 5);
+		Assert::AreEqual(error, 0);
+		matriu = tauler3.getMatriu();
+		Assert::AreEqual(matriu[0][5].teFlag(), true);
+		Assert::AreEqual(tauler3.getFlags(), 7);
+
+		Board tauler4(8, 8, 8);
+		error = tauler4.posarFlags(1, 5);
+		Assert::AreEqual(error, 0);
+		matriu = tauler4.getMatriu();
+		Assert::AreEqual(matriu[1][5].teFlag(), true);
+		Assert::AreEqual(tauler4.getFlags(), 7);
+
+		Board tauler5(8, 8, 8);
+		error = tauler5.posarFlags(6, 5);
+		Assert::AreEqual(error, 0);
+		matriu = tauler5.getMatriu();
+		Assert::AreEqual(matriu[6][5].teFlag(), true);
+		Assert::AreEqual(tauler5.getFlags(), 7);
+
+		Board tauler6(8, 8, 8);
+		error = tauler6.posarFlags(7, 5);
+		Assert::AreEqual(error, 0);
+		matriu = tauler6.getMatriu();
+		Assert::AreEqual(matriu[7][5].teFlag(), true);
+		Assert::AreEqual(tauler6.getFlags(), 7);
+
+		Board tauler7(8, 8, 8);
+		error = tauler.posarFlags(8, 5);
+		Assert::AreEqual(error, -1);
+		Assert::AreEqual(tauler7.getFlags(), 8);
+
+		// valors límit/frontera d'amplada
+		Board tauler8(8, 8, 8);
+		error = tauler8.posarFlags(3, -1);
+		Assert::AreEqual(error, -1);
+		Assert::AreEqual(tauler8.getFlags(), 8);
+
+		Board tauler9(8, 8, 8);
+		error = tauler9.posarFlags(3, 0);
+		Assert::AreEqual(error, 0);
+		matriu = tauler9.getMatriu();
+		Assert::AreEqual(matriu[3][0].teFlag(), true);
+		Assert::AreEqual(tauler9.getFlags(), 7);
+
+		Board tauler10(8, 8, 8);
+		error = tauler10.posarFlags(3, 1);
+		Assert::AreEqual(error, 0);
+		matriu = tauler10.getMatriu();
+		Assert::AreEqual(matriu[3][1].teFlag(), true);
+		Assert::AreEqual(tauler10.getFlags(), 7);
+
+		Board tauler11(8, 8, 8);
+		error = tauler11.posarFlags(3, 6);
+		Assert::AreEqual(error, 0);
+		matriu = tauler11.getMatriu();
+		Assert::AreEqual(matriu[3][6].teFlag(), true);
+		Assert::AreEqual(tauler11.getFlags(), 7);
+
+		Board tauler12(8, 8, 8);
+		error = tauler12.posarFlags(3, 7);
+		Assert::AreEqual(error, 0);
+		matriu = tauler12.getMatriu();
+		Assert::AreEqual(matriu[3][7].teFlag(), true);
+		Assert::AreEqual(tauler12.getFlags(), 7);
+
+		Board tauler13(8, 8, 8);
+		error = tauler13.posarFlags(3, 8);
+		Assert::AreEqual(error, -1);
+		Assert::AreEqual(tauler13.getFlags(), 8);
+
+		// casos alternatius
+		Board tauler14(3, 3, 1);
+		tauler14.posarFlags(0, 0);
+		error = tauler14.posarFlags(0, 1);
+		Assert::AreEqual(error, -1);
+		Assert::AreEqual(tauler14.getFlags(), 0);
+
+		Board tauler15(3, 3, 3);
+		tauler15.posarFlags(0, 0);
+		error = tauler15.posarFlags(0, 0);
+		Assert::AreEqual(error, -1);
+		Assert::AreEqual(tauler15.getFlags(), 2);
+
+		/*
+		Board tauler16(3, 3, 3);
+		tauler16.obrirCasella(0, 0);
+		error = tauler16.posarFlags(0, 0);
+		Assert::AreEqual(error, -1);
+		Assert::AreEqual(tauler15.getFlags(), 3);
+		*/
 	}
 };
