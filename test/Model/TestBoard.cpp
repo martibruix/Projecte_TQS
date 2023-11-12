@@ -227,4 +227,15 @@ public:
 		Assert::AreEqual(tauler15.getFlags(), 3);
 		*/
 	}
+	TEST_METHOD(test_treureFlags)
+	{
+		// cas bàsic
+		Board tauler(8, 8, 8);
+		tauler.posarFlags(3, 5);
+		int error = tauler.treureFlags(3, 5);
+		Assert::AreEqual(error, 0);
+		vector<vector<Cell>> matriu = tauler.getMatriu();
+		Assert::AreEqual(matriu[3][5].teFlag(), false);
+		Assert::AreEqual(tauler.getFlags(), 8);
+	}
 };

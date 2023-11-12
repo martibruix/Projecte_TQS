@@ -106,6 +106,8 @@ public:
         return 0;
     }
     int treureFlags(int x, int y) {
+        matriu[x][y].setFlag();
+        flags++;
         return 0;
     }
     int obrirCasella(int x, int y) {
