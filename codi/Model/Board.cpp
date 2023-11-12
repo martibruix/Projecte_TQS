@@ -1,9 +1,5 @@
 #include "Board.h"
 
-void Board::calculSubjacents(){
-
-};
-
 int Board::posarFlags(int x, int y) {
 	return 0;
 };

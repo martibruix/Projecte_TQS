@@ -56,7 +56,48 @@ public:
             }
         }
     }
-    void calculSubjacents();
+    void calculSubjacents() {
+        for (int i = 0; i < altura; i++) {
+            for (int j = 0; j < amplada; j++) {
+                if (!matriu[i][j].esMina()) {
+                    int num_subjacents = 0;
+                    if (i - 1 >= 0 && j - 1 >= 0) {
+                        if (matriu[i - 1][j - 1].esMina())
+                            num_subjacents++;
+                    }
+                    if (i - 1 >= 0) {
+                        if (matriu[i - 1][j].esMina())
+                            num_subjacents++;
+                    }
+                    if (i - 1 >= 0 && j + 1 < amplada) {
+                        if (matriu[i - 1][j + 1].esMina())
+                            num_subjacents++;
+                    }
+                    if (j - 1 >= 0) {
+                        if (matriu[i][j - 1].esMina())
+                            num_subjacents++;
+                    }
+                    if (j + 1 < amplada) {
+                        if (matriu[i][j + 1].esMina())
+                            num_subjacents++;
+                    }
+                    if (i + 1 < altura && j - 1 >= 0) {
+                        if (matriu[i + 1][j - 1].esMina())
+                            num_subjacents++;
+                    }
+                    if (i + 1 < altura) {
+                        if (matriu[i + 1][j].esMina())
+                            num_subjacents++;
+                    }
+                    if (i + 1 < altura && j + 1 < amplada) {
+                        if (matriu[i + 1][j + 1].esMina())
+                            num_subjacents++;
+                    }
+                    matriu[i][j].setSubjacents(num_subjacents);
+                }
+            }
+        }
+    };
     int posarFlags(int x, int y);
     int treureFlags(int x, int y);
     int obrirCasella(int x, int y);

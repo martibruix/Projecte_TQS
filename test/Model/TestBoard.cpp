@@ -1,5 +1,6 @@
 #include "CppUnitTest.h"
 #include "../../codi/Model/Board.h"	
+#include <string>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -87,5 +88,34 @@ public:
 		Board tauler3(4, 4, 3);
 		error = tauler3.setMatriu(matriu);
 		Assert::AreEqual(error, -1);
+	}
+	TEST_METHOD(test_calculSubjacents)
+	{
+		vector<vector<Cell>> matriu = {
+			{Cell(0, 0, 0, 0), Cell(1, 0, 0, 0), Cell(0, 0, 0, 0), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0)},
+			{Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(1, 0, 0, 0), Cell(0, 0, 0, 0), Cell(1, 0, 0, 0)},
+			{Cell(0, 0, 0, 0), Cell(1, 0, 0, 0), Cell(0, 0, 0, 0), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0)},
+			{Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0)},
+			{Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0)},
+			{Cell(0, 0, 0, 0), Cell(1, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0)}
+		};
+		vector<vector<Cell>> matriu_esperada = {
+			{Cell(0, 0, 0, 1), Cell(1, 0, 0, 0), Cell(0, 0, 0, 3), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0)},
+			{Cell(0, 0, 0, 2), Cell(0, 0, 0, 2), Cell(0, 0, 0, 5), Cell(1, 0, 0, 0), Cell(0, 0, 0, 8), Cell(1, 0, 0, 0)},
+			{Cell(0, 0, 0, 1), Cell(1, 0, 0, 0), Cell(0, 0, 0, 3), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0)},
+			{Cell(0, 0, 0, 3), Cell(0, 0, 0, 4), Cell(0, 0, 0, 4), Cell(0, 0, 0, 3), Cell(0, 0, 0, 3), Cell(0, 0, 0, 2)},
+			{Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0)},
+			{Cell(0, 0, 0, 3), Cell(1, 0, 0, 0), Cell(0, 0, 0, 3), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0)}
+		};
+
+		Board tauler(6, 6, 14);
+		tauler.setMatriu(matriu);
+		tauler.calculSubjacents();
+		vector<vector<Cell>> matriu_board = tauler.getMatriu();
+		for (int i = 0; i < matriu_esperada.size(); i++)
+			for (int j = 0; j < matriu_esperada[i].size(); j++) {
+				wstring message = L"Error a la posició (" + to_wstring(i) + L", " + to_wstring(j) + L")";
+				Assert::AreEqual(matriu_esperada[i][j].getSubjacents(), matriu_board[i][j].getSubjacents(), message.c_str());
+			}
 	}
 };
