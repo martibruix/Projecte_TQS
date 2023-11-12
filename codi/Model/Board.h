@@ -106,6 +106,8 @@ public:
         return 0;
     }
     int treureFlags(int x, int y) {
+        if (x < 0 || x >= altura || y < 0 || y >= amplada || !matriu[x][y].teFlag())
+            return -1;
         matriu[x][y].setFlag();
         flags++;
         return 0;
