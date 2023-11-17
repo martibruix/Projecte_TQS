@@ -113,53 +113,61 @@ public:
         return 0;
     }
     int obrirCasella(int x, int y) {
-        if (!matriu[x][y].estaOberta()) {
+        int puntuacio = 0;
+        if (!matriu[x][y].estaOberta() && !matriu[x][y].teFlag()) {
             matriu[x][y].setOberta();
+            puntuacio += 10;
             if (matriu[x][y].esMina()) {
-                return 0;
+                return -1;
             }
             else {
-                int alt_esq = matriu[x - 1][y - 1].getSubjacents();
-                int alt_cen = matriu[x - 1][y].getSubjacents();
-                int alt_dre = matriu[x - 1][y + 1].getSubjacents();
-                int cen_dre = matriu[x][y + 1].getSubjacents();
-                int cen_esq = matriu[x][y - 1].getSubjacents();
-                int sot_esq = matriu[x + 1][y - 1].getSubjacents();
-                int sot_cen = matriu[x + 1][y].getSubjacents();
-                int sot_dre = matriu[x + 1][y + 1].getSubjacents();
-                if (alt_esq == 0) {
-                    obrirCasella(x - 1, y - 1);
-                }
-                else if (alt_cen == 0) {
-                    obrirCasella(x - 1, y);
-                }
-                else if (alt_dre == 0) {
-                    obrirCasella(x - 1, y + 1);
-                }
-                else if (cen_dre == 0) {
-                    obrirCasella(x, y + 1);
-                }
-                else if (cen_esq == 0) {
-                    obrirCasella(x, y - 1);
-                }
-                else if (sot_esq == 0) {
-                    obrirCasella(x + 1, y - 1);
-                }
-                else if (sot_cen == 0) {
-                    obrirCasella(x + 1, y);
-                }
-                else if (sot_dre == 0) {
-                    obrirCasella(x + 1, y + 1);
-                }
-                else {
-                    if (alt_esq != 0 && alt_cen != 0 && alt_dre != 0 && cen_dre != 0 && cen_esq != 0 && sot_cen != 0 && sot_dre != 0 && sot_esq != 0) {
-                        return 0;
+                if (matriu[x][y].getSubjacents() == 0) {
+                    if (x - 1 >= 0 && y - 1 >= 0) {
+                        int p = obrirCasella(x - 1, y - 1);
+                        if (p > 0)
+                            puntuacio += p;
                     }
-                    else {
-                        obrirCasella(x, y);
+                    if (x - 1 >= 0) {
+                        int p = obrirCasella(x - 1, y);
+                        if (p > 0)
+                            puntuacio += p;
+                    }
+                    if (x - 1 >= 0 && y + 1 < amplada) {
+                        int p = obrirCasella(x - 1, y + 1);
+                        if (p > 0)
+                            puntuacio += p;
+                    }
+                    if (y - 1 >= 0) {
+                        int p = obrirCasella(x, y - 1);
+                        if (p > 0)
+                            puntuacio += p;
+                    }
+                    if (y + 1 < amplada) {
+                        int p = obrirCasella(x, y + 1);
+                        if (p > 0)
+                            puntuacio += p;
+                    }
+                    if (x + 1 < altura && y - 1 >= 0) {
+                        int p = obrirCasella(x + 1, y - 1);
+                        if (p > 0)
+                            puntuacio += p;
+                    }
+                    if (x + 1 < altura) {
+                        int p = obrirCasella(x + 1, y);
+                        if (p > 0)
+                            puntuacio += p;
+                    }
+                    if (x + 1 < altura && y + 1 < amplada) {
+                        int p = obrirCasella(x + 1, y + 1);
+                        if (p > 0)
+                            puntuacio += p;
                     }
                 }
             }
+            return puntuacio;
+        }
+        else {
+            return -2;
         }
     }
 private:
@@ -168,3 +176,67 @@ private:
     int mines;
     int flags;
 };
+
+/*int alt_esq = matriu[x - 1][y - 1].getSubjacents();
+int alt_cen = matriu[x - 1][y].getSubjacents();
+int alt_dre = matriu[x - 1][y + 1].getSubjacents();
+int cen_esq = matriu[x][y - 1].getSubjacents();
+int cen_dre = matriu[x][y + 1].getSubjacents();
+int sot_esq = matriu[x + 1][y - 1].getSubjacents();
+int sot_cen = matriu[x + 1][y].getSubjacents();
+int sot_dre = matriu[x + 1][y + 1].getSubjacents();
+    if (alt_esq == 0) {
+        if (matriu[x - 1][y - 1].teFlag()) {
+            matriu[x - 1][y - 1].setFlag();
+        }
+        obrirCasella(x - 1, y - 1);
+    }
+    else if (alt_cen == 0) {
+        if (matriu[x - 1][y - 1].teFlag()) {
+            matriu[x - 1][y - 1].setFlag();
+        }
+        obrirCasella(x - 1, y);
+    }
+    else if (alt_dre == 0) {
+        if (matriu[x - 1][y - 1].teFlag()) {
+            matriu[x - 1][y - 1].setFlag();
+        }
+        obrirCasella(x - 1, y + 1);
+    }
+    else if (cen_dre == 0) {
+        if (matriu[x - 1][y - 1].teFlag()) {
+            matriu[x - 1][y - 1].setFlag();
+        }
+        obrirCasella(x, y + 1);
+    }
+    else if (cen_esq == 0) {
+        if (matriu[x - 1][y - 1].teFlag()) {
+            matriu[x - 1][y - 1].setFlag();
+        }
+        obrirCasella(x, y - 1);
+    }
+    else if (sot_esq == 0) {
+        if (matriu[x - 1][y - 1].teFlag()) {
+            matriu[x - 1][y - 1].setFlag();
+        }
+        obrirCasella(x + 1, y - 1);
+    }
+    else if (sot_cen == 0) {
+        if (matriu[x - 1][y - 1].teFlag()) {
+            matriu[x - 1][y - 1].setFlag();
+        }
+        obrirCasella(x + 1, y);
+    }
+    else if (sot_dre == 0) {
+        if (matriu[x - 1][y - 1].teFlag()) {
+            matriu[x - 1][y - 1].setFlag();
+        }
+        obrirCasella(x + 1, y + 1);
+    }
+    else {
+        obrirCasella(x, y);
+    }
+}
+if (alt_esq != 0 && alt_cen != 0 && alt_dre != 0 && cen_dre != 0 && cen_esq != 0 && sot_cen != 0 && sot_dre != 0 && sot_esq != 0) {
+    return puntuacio;
+}*/

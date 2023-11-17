@@ -219,13 +219,12 @@ public:
 		Assert::AreEqual(error, -1);
 		Assert::AreEqual(tauler15.getFlags(), 2);
 
-		/*
 		Board tauler16(3, 3, 3);
 		tauler16.obrirCasella(0, 0);
 		error = tauler16.posarFlags(0, 0);
 		Assert::AreEqual(error, -1);
-		Assert::AreEqual(tauler15.getFlags(), 3);
-		*/
+		Assert::AreEqual(tauler16.getFlags(), 3);
+
 	}
 	TEST_METHOD(test_treureFlags)
 	{
@@ -336,5 +335,122 @@ public:
 		matriu = tauler14.getMatriu();
 		Assert::AreEqual(matriu[4][5].teFlag(), false);
 		Assert::AreEqual(tauler14.getFlags(), 7);
+	}
+	TEST_METHOD(test_obrirCasella)
+	{
+		vector<vector<Cell>> matriu = {
+			{Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0)},
+			{Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0)},
+			{Cell(0, 0, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(1, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(1, 0, 0, 0), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(0, 0, 0, 2), Cell(0, 0, 0, 3), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(1, 0, 0, 0)}
+		};
+
+		Board tauler(8, 8, 10);
+		tauler.setMatriu(matriu);
+
+		// obrir una casella sense mina i sense recursivitat
+		vector<vector<Cell>> matriu_esperada = {
+			{Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(0, 0, 0, 2), Cell(0, 1, 0, 1), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0)},
+			{Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0)},
+			{Cell(0, 0, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(1, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(1, 0, 0, 0), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(0, 0, 0, 2), Cell(0, 0, 0, 3), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(1, 0, 0, 0)}
+		};
+		int puntuacio = tauler.obrirCasella(0, 5);
+		Assert::AreEqual(puntuacio, 10);
+		vector<vector<Cell>> matriu_board = tauler.getMatriu();
+		for (int i = 0; i < matriu_esperada.size(); i++)
+			for (int j = 0; j < matriu_esperada[i].size(); j++) {
+				wstring message = L"Error a la posició (" + to_wstring(i) + L", " + to_wstring(j) + L")";
+				Assert::AreEqual(matriu_esperada[i][j].estaOberta(), matriu_board[i][j].estaOberta(), message.c_str());
+			}
+
+		// obrir una casella sense mina i amb recursivitat
+		matriu_esperada = {
+			{Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(0, 0, 0, 2), Cell(0, 1, 0, 1), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0)},
+			{Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1)},
+			{Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 1), Cell(0, 1, 0, 2), Cell(0, 1, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0)},
+			{Cell(0, 1, 0, 1), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(1, 0, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(1, 0, 0, 0), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(0, 1, 0, 2), Cell(0, 1, 0, 3), Cell(0, 1, 0, 2), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(1, 0, 0, 0)}
+		};
+		puntuacio = tauler.obrirCasella(4, 3);
+		Assert::AreEqual(puntuacio, 370);
+		matriu_board = tauler.getMatriu();
+		for (int i = 0; i < matriu_esperada.size(); i++)
+			for (int j = 0; j < matriu_esperada[i].size(); j++) {
+				wstring message = L"Error a la posició (" + to_wstring(i) + L", " + to_wstring(j) + L")";
+				Assert::AreEqual(matriu_esperada[i][j].estaOberta(), matriu_board[i][j].estaOberta(), message.c_str());
+			}
+
+		// obrir una casella sense mina i amb recursivitat
+		matriu_esperada = {
+			{Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(0, 0, 0, 2), Cell(0, 1, 0, 1), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0)},
+			{Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 1, 0, 2), Cell(0, 1, 0, 1)},
+			{Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 1), Cell(0, 1, 0, 2), Cell(0, 1, 0, 1), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0)},
+			{Cell(0, 1, 0, 1), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 1), Cell(0, 1, 0, 1)},
+			{Cell(1, 0, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(1, 0, 0, 0), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(0, 1, 0, 2), Cell(0, 1, 0, 3), Cell(0, 1, 0, 2), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(1, 0, 0, 0)}
+		};
+		puntuacio = tauler.obrirCasella(2, 7);
+		Assert::AreEqual(puntuacio, 60);
+		matriu_board = tauler.getMatriu();
+		for (int i = 0; i < matriu_esperada.size(); i++)
+			for (int j = 0; j < matriu_esperada[i].size(); j++) {
+				wstring message = L"Error a la posició (" + to_wstring(i) + L", " + to_wstring(j) + L")";
+				Assert::AreEqual(matriu_esperada[i][j].estaOberta(), matriu_board[i][j].estaOberta(), message.c_str());
+			}
+
+		// obrir una casella amb mina
+		matriu_esperada = {
+			{Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(0, 0, 0, 2), Cell(0, 1, 0, 1), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0)},
+			{Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 1, 0, 2), Cell(0, 1, 0, 1)},
+			{Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 1), Cell(0, 1, 0, 2), Cell(0, 1, 0, 1), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0)},
+			{Cell(0, 1, 0, 1), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 1), Cell(0, 1, 0, 1)},
+			{Cell(1, 0, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(1, 0, 0, 0), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(0, 1, 0, 2), Cell(0, 1, 0, 3), Cell(0, 1, 0, 2), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 1), Cell(1, 1, 0, 0), Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(1, 0, 0, 0)}
+		};
+		puntuacio = tauler.obrirCasella(7, 1);
+		Assert::AreEqual(puntuacio, -1);
+		matriu_board = tauler.getMatriu();
+		for (int i = 0; i < matriu_esperada.size(); i++)
+			for (int j = 0; j < matriu_esperada[i].size(); j++) {
+				wstring message = L"Error a la posició (" + to_wstring(i) + L", " + to_wstring(j) + L")";
+				Assert::AreEqual(matriu_esperada[i][j].estaOberta(), matriu_board[i][j].estaOberta(), message.c_str());
+			}
+
+		// obrir una casella que ja estava oberta
+		puntuacio = tauler.obrirCasella(4, 4);
+		Assert::AreEqual(puntuacio, -2);
+		matriu_board = tauler.getMatriu();
+		for (int i = 0; i < matriu_esperada.size(); i++)
+			for (int j = 0; j < matriu_esperada[i].size(); j++) {
+				wstring message = L"Error a la posició (" + to_wstring(i) + L", " + to_wstring(j) + L")";
+				Assert::AreEqual(matriu_esperada[i][j].estaOberta(), matriu_board[i][j].estaOberta(), message.c_str());
+			}
+
+		// obrir una casella on hi ha un flag
+		tauler.posarFlags(7, 3);
+		puntuacio = tauler.obrirCasella(7, 3);
+		Assert::AreEqual(puntuacio, -2);
+		matriu_board = tauler.getMatriu();
+		for (int i = 0; i < matriu_esperada.size(); i++)
+			for (int j = 0; j < matriu_esperada[i].size(); j++) {
+				wstring message = L"Error a la posició (" + to_wstring(i) + L", " + to_wstring(j) + L")";
+				Assert::AreEqual(matriu_esperada[i][j].estaOberta(), matriu_board[i][j].estaOberta(), message.c_str());
+			}
 	}
 };
