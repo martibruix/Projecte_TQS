@@ -136,6 +136,9 @@
     <ClInclude Include="Control\Menu.h" />
     <ClInclude Include="Model\Board.h" />
     <ClInclude Include="Model\Cell.h" />
+    <ClInclude Include="View\Menu.h" />
+    <ClInclude Include="View\Printer.h" />
+    <ClInclude Include="View\Ranking.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

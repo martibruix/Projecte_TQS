@@ -25,6 +25,17 @@ public:
     int play(){
 
     }
+    vector<vector<char>> printMatriu(){
+        vector<vector<char>> matriuFinal;
+        return matriuFinal = {
+            {' ', 'F', '0', ' ', ' ', ' '},
+            {'3', ' ', '1', ' ', ' ', ' '},
+            {'X', 'F', 'F', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' '}
+        };
+    }
     Board* getTauler() { return tauler; }
     int getPuntuacio() { return puntuacio; }
     int getDificultat() { return dificultat; }

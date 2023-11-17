@@ -45,4 +45,40 @@ public:
         Assert::AreEqual(tauler->getAmplada(), 6);
         Assert::AreEqual(tauler->getMines(), 7);
 	}
+    TEST_METHOD(test_printMatriu)
+    {
+        vector<vector<Cell>> matriu = {
+			{Cell(1, 0, 0, 0), Cell(0, 0, 1, 1), Cell(0, 1, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0)},
+			{Cell(0, 1, 0, 3), Cell(0, 0, 0, 3), Cell(0, 1, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0)},
+			{Cell(1, 1, 0, 0), Cell(1, 0, 1, 0), Cell(0, 0, 1, 2), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0)},
+            {Cell(1, 0, 0, 0), Cell(1, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0)},
+            {Cell(1, 0, 0, 0), Cell(0, 0, 0, 4), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0)},
+            {Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0)}
+		};
+
+        Game partida(1, "nom");
+        Board* tauler = partida.getTauler();
+        tauler->setMatriu(matriu);
+        vector<vector<char>> matriu_partida = partida.printMatriu();
+
+        vector<vector<char>> matriu_esperada = {
+            {' ', 'F', '0', ' ', ' ', ' '},
+            {'3', ' ', '1', ' ', ' ', ' '},
+            {'X', 'F', 'F', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' '}
+        };
+
+        for (int i=0; i < matriu_esperada.size(); i++){
+            for (int j=0; j < matriu_esperada[i].size(); j++){
+                wstring message = L"Error a la posició (" + to_wstring(i) + L", " + to_wstring(j) + L")";
+				Assert::AreEqual(matriu_esperada[i][j], matriu_partida[i][j], message.c_str());
+            }
+        }
+    }
+    TEST_METHOD(test_play)
+    {
+
+    }
 };

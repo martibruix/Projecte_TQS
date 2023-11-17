@@ -170,6 +170,9 @@ public:
             return -2;
         }
     }
+    int victoria(){
+        return 0;
+    }
 private:
     vector<vector <Cell>> matriu;
 	int altura, amplada;
