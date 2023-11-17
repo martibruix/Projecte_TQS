@@ -156,6 +156,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Control\TestGame.cpp" />
+    <ClCompile Include="Control\TestMenu.cpp" />
     <ClCompile Include="Model\TestBoard.cpp" />
     <ClCompile Include="Model\TestCell.cpp" />
   </ItemGroup>
