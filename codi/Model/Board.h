@@ -115,6 +115,15 @@ public:
     int obrirCasella(int x, int y) {
         return 0;
     }
+    int victoria() {
+        for (int i = 0; i < altura; i++) {
+            for (int j = 0; j < amplada; j++) {
+                if (!matriu[i][j].esMina() && !matriu[i][j].estaOberta())
+                    return 0;
+            }
+        }
+        return 1;
+    }
 private:
     vector<vector <Cell>> matriu;
 	int altura, amplada;
