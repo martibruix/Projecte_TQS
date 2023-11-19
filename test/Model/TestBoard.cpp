@@ -453,4 +453,28 @@ public:
 				Assert::AreEqual(matriu_esperada[i][j].estaOberta(), matriu_board[i][j].estaOberta(), message.c_str());
 			}
 	}
+	TEST_METHOD(test_victoria)
+	{
+		vector<vector<Cell>> matriu = {
+			{Cell(1, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 1, 0, 0)},
+			{Cell(0, 1, 0, 3), Cell(0, 1, 0, 3), Cell(0, 1, 0, 1)},
+			{Cell(1, 0, 0, 0), Cell(1, 0, 1, 0), Cell(0, 0, 0, 1)}
+		};
+
+		Board tauler(3, 3, 3);
+		tauler.setMatriu(matriu);
+		int win = tauler.victoria();
+		Assert::AreEqual(win, 0);
+
+		matriu = {
+			{Cell(1, 0, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0)},
+			{Cell(0, 1, 0, 3), Cell(0, 1, 0, 3), Cell(0, 1, 0, 1)},
+			{Cell(1, 0, 0, 0), Cell(1, 0, 1, 0), Cell(0, 1, 0, 1)}
+		};
+
+		Board tauler2(3, 3, 3);
+		tauler2.setMatriu(matriu);
+		win = tauler2.victoria();
+		Assert::AreEqual(win, 1);
+	}
 };
