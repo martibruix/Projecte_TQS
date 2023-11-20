@@ -1,5 +1,6 @@
 #include "../Model/Board.h"
 #include <string>
+using namespace std;
 
 class Game
 {
@@ -27,14 +28,27 @@ public:
     }
     vector<vector<char>> printMatriu(){
         vector<vector<char>> matriuFinal;
-        return matriuFinal = {
-            {' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' '}
-        };
+        matriuFinal.resize(tauler->getAltura());
+        for (int i = 0; i < matriuFinal.size(); i++)
+            matriuFinal[i].resize(tauler->getAmplada());
+
+        vector<vector<Cell>> matriuBoard = tauler->getMatriu();
+        for (int i = 0; i < matriuFinal.size(); i++) {
+            for (int j = 0; j < matriuFinal[i].size(); j++) {
+                if (matriuBoard[i][j].teFlag())
+                    matriuFinal[i][j] = 'F';
+                else if (!matriuBoard[i][j].estaOberta())
+                    matriuFinal[i][j] = ' ';
+                else if (matriuBoard[i][j].esMina())
+                    matriuFinal[i][j] = 'X';
+                else {
+                    string aux = to_string(matriuBoard[i][j].getSubjacents());
+                    matriuFinal[i][j] = *aux.c_str();
+                }
+            }
+        }
+
+        return matriuFinal;
     }
     Board* getTauler() { return tauler; }
     int getPuntuacio() { return puntuacio; }
