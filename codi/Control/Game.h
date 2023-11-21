@@ -1,11 +1,32 @@
 #include "../Model/Board.h"
 #include <string>
+#include "../View/InputGame.h"
+#include "../View/Printer.h"
 using namespace std;
 
 class Game
 {
 public:
-    Game(int dif, string name){
+    Game(int dif, string name) {
+        dificultat = dif;
+        nom = name;
+        puntuacio = 0;
+        if (dif == FACIL) {
+            tauler = new Board(6, 6, 7);
+        }
+        else if (dif == MITJA) {
+            tauler = new Board(8, 8, 10);
+        }
+        else if (dif == DIFICIL) {
+            tauler = new Board(15, 15, 35);
+        }
+        else {
+            tauler = new Board(6, 6, 7);
+            dificultat = FACIL;
+        }
+        inputGame = new InputGame();
+    }
+    Game(int dif, string name, InputGame& input) {
         dificultat = dif;
         nom = name;
         puntuacio=0;
@@ -22,9 +43,10 @@ public:
             tauler = new Board(6, 6, 7);
             dificultat = FACIL;
         }
+        inputGame = &input;
     }
     int play(){
-
+        return 0;
     }
     vector<vector<char>> printMatriu(){
         vector<vector<char>> matriuFinal;
@@ -60,5 +82,7 @@ private:
     int dificultat;
     string nom;
     const int FACIL=1, MITJA=2, DIFICIL=3;
+    InputGame* inputGame;
+    Printer printer;
 };
 

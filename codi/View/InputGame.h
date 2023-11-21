@@ -6,6 +6,7 @@ using namespace std;
 class InputGame
 {
 public:
+	InputGame() {};
 	virtual string getInstruccio() {
 		string missatge;
 		cin >> missatge;
