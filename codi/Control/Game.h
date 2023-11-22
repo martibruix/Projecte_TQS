@@ -45,8 +45,47 @@ public:
         }
         inputGame = &input;
     }
+    void initTauler() {
+        tauler->crearMines();
+        tauler->calculSubjacents();
+    }
     int play(){
-        return 0;
+        bool mort = false, victoria = false, sortir = false;
+        
+        do {
+            printer.tauler(printMatriu());
+            vector<int> instruccio = inputGame->getInstruccio();
+            
+            if (instruccio[0] == OPEN) {
+                int punts = tauler->obrirCasella(instruccio[1], instruccio[2]);
+                if (punts == -1) {
+                    mort = true;
+                }
+                else if (punts > -1) {
+                    puntuacio += punts;
+                    if (tauler->victoria())
+                        victoria = true;
+                }
+            }
+            else if (instruccio[0] == POSAR_FLAG) {
+                tauler->posarFlags(instruccio[1], instruccio[2]);
+            }
+            else if (instruccio[0] == TREURE_FLAG) {
+                tauler->treureFlags(instruccio[1], instruccio[2]);
+            }
+            else if (instruccio[0] == EXIT) {
+                sortir = true;
+            }
+        } while (!mort && !victoria && !sortir);
+
+        printer.tauler(printMatriu());
+        printer.finalPartida(sortir, victoria, puntuacio);
+        
+        if (victoria)
+            return 1;
+        if (mort)
+            return 0;
+        return -1;
     }
     vector<vector<char>> printMatriu(){
         vector<vector<char>> matriuFinal;
@@ -81,7 +120,8 @@ private:
     int puntuacio;
     int dificultat;
     string nom;
-    const int FACIL=1, MITJA=2, DIFICIL=3;
+    const int FACIL = 1, MITJA = 2, DIFICIL = 3;
+    const int OPEN = 0, POSAR_FLAG = 1, TREURE_FLAG = 2, EXIT = 3, ERROR = -1;
     InputGame* inputGame;
     Printer printer;
 };

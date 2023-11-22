@@ -90,7 +90,8 @@ public:
         };
 
         // Obrir mina i perdre
-        vector<string> instruccions = {"OPEN 0 0"};
+        //vector<string> instruccions = {"OPEN 0 0"};
+        vector<vector<int>> instruccions = { {0, 0, 0} };
         MockInputGame mockInput(instruccions);
         Game partida(1, "nom", mockInput);
         Board* tauler = partida.getTauler();
@@ -118,7 +119,8 @@ public:
         }
 
         // Obrir 3 caselles i sortir
-        instruccions = { "OPEN 1 0", "OPEN 1 1", "OPEN 1 2", "EXIT"};
+        //instruccions = { "OPEN 1 0", "OPEN 1 1", "OPEN 1 2", "EXIT"};
+        instruccions = { {0, 1, 0}, {0, 1, 1}, {0, 1, 2}, {3} };
         MockInputGame mockInput2(instruccions);
         Game partida2(1, "nom", mockInput2);
         tauler = partida2.getTauler();
@@ -144,12 +146,16 @@ public:
                 Assert::AreEqual(matriu_esperada[i][j].teFlag(), matriu_board[i][j].teFlag(), message.c_str());
             }
         }
-
+        
         // Obrir totes les caselles i guanyar
-        instruccions = { "OPEN 0 1", "OPEN 0 2", "OPEN 0 3", "OPEN 0 4", "OPEN 1 0", "OPEN 1 1", "OPEN 1 2",
-            "OPEN 1 3", "OPEN 1 4", "OPEN 1 5", "OPEN 2 0", "OPEN 2 2", "OPEN 2 3", "OPEN 2 4", "OPEN 2 5",
-            "OPEN 3 0", "OPEN 3 2", "OPEN 3 4", "OPEN 4 0", "OPEN 4 1", "OPEN 4 2", "OPEN 4 3", "OPEN 4 4",
-            "OPEN 4 5", "OPEN 5 0", "OPEN 5 1", "OPEN 5 3", "OPEN 5 4", "OPEN 5 5" };
+        //instruccions = { "OPEN 0 1", "OPEN 0 2", "OPEN 0 3", "OPEN 0 4", "OPEN 1 0", "OPEN 1 1", "OPEN 1 2",
+        //    "OPEN 1 3", "OPEN 1 4", "OPEN 1 5", "OPEN 2 0", "OPEN 2 2", "OPEN 2 3", "OPEN 2 4", "OPEN 2 5",
+        //    "OPEN 3 0", "OPEN 3 2", "OPEN 3 4", "OPEN 4 0", "OPEN 4 1", "OPEN 4 2", "OPEN 4 3", "OPEN 4 4",
+        //    "OPEN 4 5", "OPEN 5 0", "OPEN 5 1", "OPEN 5 3", "OPEN 5 4", "OPEN 5 5" };
+        instruccions = { {0, 0, 1}, {0, 0, 2}, {0, 0, 3}, {0, 0, 4}, {0, 1, 0}, {0, 1, 1}, {0, 1, 2},
+            {0, 1, 3}, {0, 1, 4}, {0, 1, 5}, {0, 2, 0}, {0, 2, 2}, {0, 2, 3}, {0, 2, 4}, {0, 2, 5},
+            {0, 3, 0}, {0, 3, 2}, {0, 3, 4}, {0, 4, 0}, {0, 4, 1}, {0, 4, 2}, {0, 4, 3}, {0, 4, 4},
+            {0, 4, 5}, {0, 5, 0}, {0, 5, 1}, {0, 5, 3}, {0, 5, 4}, {0, 5, 5} };
         MockInputGame mockInput3(instruccions);
         Game partida3(1, "nom", mockInput3);
         tauler = partida3.getTauler();
@@ -177,7 +183,8 @@ public:
         }
 
         // Obrir dos caselles (amb recursivitat i sense) i apretar una mina
-        instruccions = { "OPEN 0 3", "OPEN 5 3", "OPEN 3 1" };
+        //instruccions = { "OPEN 0 3", "OPEN 5 3", "OPEN 3 1" };
+        instruccions = { {0, 0, 3}, {0, 5, 3}, {0, 3, 1} };
         MockInputGame mockInput4(instruccions);
         Game partida4(1, "nom", mockInput4);
         tauler = partida4.getTauler();
@@ -191,7 +198,7 @@ public:
             {Cell(1, 0, 0, 0), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(1, 0, 0, 0)},
             {Cell(0, 0, 0, 2), Cell(0, 1, 0, 2), Cell(0, 1, 0, 1), Cell(0, 1, 0, 0), Cell(0, 1, 0, 1), Cell(0, 0, 0, 1)},
             {Cell(0, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 1, 0, 3), Cell(0, 1, 0, 1), Cell(0, 1, 0, 2), Cell(0, 0, 0, 1)},
-            {Cell(0, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 3), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0)},
+            {Cell(0, 0, 0, 2), Cell(1, 1, 0, 0), Cell(0, 0, 0, 3), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0)},
             {Cell(0, 0, 0, 1), Cell(0, 0, 0, 2), Cell(0, 0, 0, 3), Cell(0, 0, 0, 2), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1)},
             {Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(1, 0, 0, 0), Cell(0, 1, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0)}
         };
@@ -207,8 +214,10 @@ public:
         // Posar flag, posar flag a la mateixa posicio, provar d'obrir la casella on hi ha flag,
         // posar totes les flags, veure que no es poden posar més, treure flag a posicio incorrecta,
         // treure 2 flags a posicions correctes i marxar
-        instruccions = { "P 0 0", "P 0 0", "OPEN 0 0", "P 0 1", "P 0 2", "P 0 3", "P 0 4", "P 0 5", "P 1 0",
-            "P 1 1", "T 2 0", "T 0 0", "T 0 1", "EXIT" };
+        //instruccions = { "P 0 0", "P 0 0", "OPEN 0 0", "P 0 1", "P 0 2", "P 0 3", "P 0 4", "P 0 5", "P 1 0",
+        //    "P 1 1", "T 2 0", "T 0 0", "T 0 1", "EXIT" };
+        instruccions = { {1, 0, 0}, {1, 0, 0}, {0, 0, 0}, {1, 0, 1}, {1, 0, 2}, {1, 0, 3}, {1, 0, 4},
+            {1, 0, 5}, {1, 1, 0}, {1, 1, 1}, {2, 2, 0}, {2, 0, 0}, {2, 0, 1}, {3} };
         MockInputGame mockInput5(instruccions);
         Game partida5(1, "nom", mockInput5);
         tauler = partida5.getTauler();
@@ -235,8 +244,9 @@ public:
             }
         }
 
-        // Rebre comandes incorrectes i abandonar la partida
-        instruccions = {"AAA", "OPEN", "OPEN 2", "X 2 3", "P -2 4", "T 1 14", "P 0 1 2", "EXIT 2 3", "EXIT"};
+        // Rebre una instruccio incorrecta, obrir una casella i abandonar la partida
+        //instruccions = {"AAA", "OPEN", "OPEN 2", "X 2 3", "P -2 4", "T 1 14", "P 0 1 2", "", "EXIT 2 3", "EXIT"};
+        instruccions = { {-1}, {0, 0, 1}, {3} };
         MockInputGame mockInput6(instruccions);
         Game partida6(1, "nom", mockInput6);
         tauler = partida6.getTauler();
@@ -245,9 +255,9 @@ public:
         result = partida6.play();
         Assert::AreEqual(-1, result);
         puntuacio = partida6.getPuntuacio();
-        Assert::AreEqual(0, puntuacio);
+        Assert::AreEqual(10, puntuacio);
         matriu_esperada = {
-            {Cell(1, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(1, 0, 0, 0)},
+            {Cell(1, 0, 0, 0), Cell(0, 1, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(1, 0, 0, 0)},
             {Cell(0, 0, 0, 2), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1)},
             {Cell(0, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 3), Cell(0, 0, 0, 1), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1)},
             {Cell(0, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 3), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0)},

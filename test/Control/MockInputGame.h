@@ -7,16 +7,16 @@ using namespace std;
 class MockInputGame : public InputGame
 {
 public:
-	MockInputGame(vector<string> instr) {
+	MockInputGame(vector<vector<int>> instr) {
 		instruccions = instr;
 		index = 0;
 	}
-	string getInstruccio() override {
-		string instruccio = instruccions[index];
+	vector<int> getInstruccio() override {
+		vector<int> instruccio = instruccions[index];
 		index++;
 		return instruccio;
 	}
 private:
-	vector<string> instruccions;
+	vector<vector<int>> instruccions;
 	int index;
 };

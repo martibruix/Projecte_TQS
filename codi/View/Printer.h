@@ -28,16 +28,21 @@ public:
         cout << "Flags disponibles: " << flags << endl;
         cout << "Puntuació: " << punts << " punts" << endl;
     }
+
+    void tauler(vector<vector<char>> matriu) {
+
+    }
     
-    void FinalPartida(bool fi, bool victoria, int punts) {
-        if (fi) {
+    void finalPartida(bool abandonat, bool victoria, int punts) {
+        if (abandonat) {
+            cout << "SORTINT DEL JOC" << endl;
+        } else {
             if (victoria) {
                 cout << "HAS GUANYAT AMB UNA PUNTUACIÓ DE " << punts << " PUNTS" << endl;
-            } else {
+            }
+            else {
                 cout << "HAS PERDUT AMB UNA PUNTUACIÓ DE " << punts << " PUNTS" << endl;
             }
-        } else {
-            cout << "SORTINT DEL JOC" << endl;
         }
     }
 };
