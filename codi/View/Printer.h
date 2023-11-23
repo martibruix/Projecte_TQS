@@ -2,12 +2,13 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
 
 class Printer
 {
 public:
-    void tauler(vector<vector<char>> matriu, int flags, int punts) {
+    void tauler(vector<vector<char>> matriu) {
         string index = "   ";
         string separator = "  +";
         for (int j = 0; j < matriu[0].size(); j++) {
@@ -25,6 +26,10 @@ public:
             cout << str << endl;
             cout << separator << endl;
         }
+        cout << endl;
+    }
+
+    void missatgePartida(int flags, int punts) {
         cout << "Flags disponibles: " << flags << endl;
         cout << "Puntuació: " << punts << " punts" << endl << endl;
         cout << "Introdueix una instrucció: ";
@@ -41,5 +46,9 @@ public:
                 cout << "HAS PERDUT AMB UNA PUNTUACIÓ DE " << punts << " PUNTS" << endl;
             }
         }
+    }
+
+    void netejaPantalla() {
+        system("cls");
     }
 };

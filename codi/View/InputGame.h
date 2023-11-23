@@ -21,40 +21,43 @@ public:
 		cin >> instr;
 
 		if (instr == "OPEN") {
-			instruccio.push_back(0);
-
-			string x;
-			string y;
-			cin >> x >> y;
-
-			int pos_x = stoi(x);
-			int pos_y = stoi(y);
-			instruccio.push_back(pos_x);
-			instruccio.push_back(pos_y);
+			int x;
+			int y;
+			if (cin >> x >> y) {
+				instruccio.push_back(0);
+				instruccio.push_back(x);
+				instruccio.push_back(y);
+			}
+			else {
+				cin.clear();
+				instruccio.push_back(-1);
+			}
 		}
 		else if (instr == "P"){
-			instruccio.push_back(1);
-
-			string x;
-			string y;
-			cin >> x >> y;
-
-			int pos_x = stoi(x);
-			int pos_y = stoi(y);
-			instruccio.push_back(pos_x);
-			instruccio.push_back(pos_y);
+			int x;
+			int y;
+			if (cin >> x >> y) {
+				instruccio.push_back(1);
+				instruccio.push_back(x);
+				instruccio.push_back(y);
+			}
+			else {
+				cin.clear();
+				instruccio.push_back(-1);
+			}
 		}
 		else if (instr == "T") {
-			instruccio.push_back(2);
-
-			string x;
-			string y;
-			cin >> x >> y;
-
-			int pos_x = stoi(x);
-			int pos_y = stoi(y);
-			instruccio.push_back(pos_x);
-			instruccio.push_back(pos_y);
+			int x;
+			int y;
+			if (cin >> x >> y) {
+				instruccio.push_back(2);
+				instruccio.push_back(x);
+				instruccio.push_back(y);
+			}
+			else {
+				cin.clear();
+				instruccio.push_back(-1);
+			}
 		}
 		else if (instr == "EXIT") {
 			instruccio.push_back(3);
@@ -62,6 +65,8 @@ public:
 		else {
 			instruccio.push_back(-1);
 		}
+
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 		return instruccio;
 	}
