@@ -113,6 +113,8 @@ public:
         return 0;
     }
     int obrirCasella(int x, int y) {
+        if (x < 0 || x >= altura || y < 0 || y >= amplada)
+            return -2;
         int puntuacio = 0;
         if (!matriu[x][y].estaOberta() && !matriu[x][y].teFlag()) {
             matriu[x][y].setOberta();

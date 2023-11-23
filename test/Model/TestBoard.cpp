@@ -452,6 +452,47 @@ public:
 				wstring message = L"Error a la posició (" + to_wstring(i) + L", " + to_wstring(j) + L")";
 				Assert::AreEqual(matriu_esperada[i][j].estaOberta(), matriu_board[i][j].estaOberta(), message.c_str());
 			}
+
+		// valors límit/frontera per l'altura
+		tauler.setMatriu(matriu);
+		
+		puntuacio = tauler.obrirCasella(-1, 4);
+		Assert::AreEqual(puntuacio, -2);
+
+		puntuacio = tauler.obrirCasella(0, 4);
+		Assert::AreEqual(puntuacio, 10);
+
+		puntuacio = tauler.obrirCasella(1, 4);
+		Assert::AreEqual(puntuacio, 10);
+
+		puntuacio = tauler.obrirCasella(6, 4);
+		Assert::AreEqual(puntuacio, 10);
+
+		puntuacio = tauler.obrirCasella(7, 4);
+		Assert::AreEqual(puntuacio, 10);
+
+		puntuacio = tauler.obrirCasella(8, 4);
+		Assert::AreEqual(puntuacio, -2);
+
+		// valors límit/frontera per l'amplada
+		puntuacio = tauler.obrirCasella(5, -1);
+		Assert::AreEqual(puntuacio, -2);
+
+		puntuacio = tauler.obrirCasella(5, 0);
+		Assert::AreEqual(puntuacio, 10);
+
+		puntuacio = tauler.obrirCasella(5, 1);
+		Assert::AreEqual(puntuacio, 10);
+
+		puntuacio = tauler.obrirCasella(5, 6);
+		Assert::AreEqual(puntuacio, 10);
+
+		puntuacio = tauler.obrirCasella(5, 7);
+		Assert::AreEqual(puntuacio, 10);
+
+		puntuacio = tauler.obrirCasella(5, 8);
+		Assert::AreEqual(puntuacio, -2);
+
 	}
 	TEST_METHOD(test_victoria)
 	{
