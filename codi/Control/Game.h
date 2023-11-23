@@ -53,7 +53,7 @@ public:
         bool mort = false, victoria = false, sortir = false;
         
         do {
-            printer.tauler(printMatriu());
+            printer.tauler(printMatriu(), tauler->getFlags(), puntuacio);
             vector<int> instruccio = inputGame->getInstruccio();
             
             if (instruccio[0] == OPEN) {
@@ -78,7 +78,7 @@ public:
             }
         } while (!mort && !victoria && !sortir);
 
-        printer.tauler(printMatriu());
+        printer.tauler(printMatriu(), tauler->getFlags(), puntuacio);
         printer.finalPartida(sortir, victoria, puntuacio);
         
         if (victoria)
