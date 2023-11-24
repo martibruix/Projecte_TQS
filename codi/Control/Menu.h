@@ -22,8 +22,27 @@ public:
         file.close();
     }
     
-    vector<vector<string>> llegirRanking() {
+    vector<vector<string>> llegirRanking(string path) {
+        string linea;
+        ifstream file(path);
+        vector<vector<string>> ranking;
+        vector<string> v_aux;
+        int i = 0;
+        while (!file.eof()) {
+            string aux;
+            file >> aux;
+            v_aux.push_back(aux);
+            if (i == 3) {
+                ranking.push_back(v_aux);
+                i = 0;
+                v_aux.clear();
+            }
+            else {
+                i++;
+            }
+        }
 
+        return ranking;
     }
 private:
     PrinterMenu printer;
