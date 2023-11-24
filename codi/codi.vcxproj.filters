@@ -41,13 +41,16 @@
     <ClInclude Include="View\Printer.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="View\Menu.h">
+    <ClInclude Include="View\PrinterMenu.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="View\Ranking.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="View\InputGame.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="View\InputMenu.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

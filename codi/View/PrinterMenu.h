@@ -3,10 +3,10 @@
 #include <iostream>
 using namespace std;
 
-class Menu
+class PrinterMenu
 {
 public:
-    void MenuInici() {
+    void menuInici() {
         cout << "==========" << endl;
         cout << "BUSCAMINES" << endl;
         cout << "==========" << endl;
@@ -19,7 +19,7 @@ public:
         cout << "Selecciona una opció: " << endl;
     }
     
-    void Dificutat() {
+    void dificutat() {
         cout << "==========" << endl;
         cout << "DIFICULTAT" << endl;
         cout << "==========" << endl;
