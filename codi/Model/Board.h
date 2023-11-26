@@ -27,8 +27,16 @@ public:
                 matriu[i].resize(amplada);
         }
     }
-	~Board() {}
-
+    Board(int alt, int amp)
+    {
+        altura = alt;
+        amplada = amp;
+        flags = alt * amp * 0.2;
+        mines = alt * amp * 0.2;
+        matriu.resize(altura);
+        for (int i = 0; i < altura; i++)
+            matriu[i].resize(amplada);
+    }
     int getAltura() { return altura; };
 	int getAmplada() { return amplada; };
     vector<vector <Cell>> getMatriu() { return matriu; }

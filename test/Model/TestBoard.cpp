@@ -518,4 +518,36 @@ public:
 		win = tauler2.victoria();
 		Assert::AreEqual(win, 1);
 	}
+	TEST_METHOD(test_loopTesting)
+	{
+		Board tauler1(1, 0);
+		tauler1.calculSubjacents();
+
+		Board tauler2(1, 1);
+		tauler2.calculSubjacents();
+
+		Board tauler3(1, 2);
+		tauler3.calculSubjacents();
+
+		Board tauler4(1, 14);
+		tauler4.calculSubjacents();
+
+		Board tauler5(1, 15);
+		tauler5.calculSubjacents();
+
+		Board tauler6(0, 6);
+		tauler6.calculSubjacents();
+
+		Board tauler7(1, 6);
+		tauler7.calculSubjacents();
+
+		Board tauler8(2, 6);
+		tauler8.calculSubjacents();
+
+		Board tauler9(14, 6);
+		tauler9.calculSubjacents();
+
+		Board tauler10(15, 6);
+		tauler10.calculSubjacents();
+	}
 };
