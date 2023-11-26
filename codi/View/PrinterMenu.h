@@ -16,7 +16,7 @@ public:
         cout << endl;
         cout << "0- Sortir" << endl;
         cout << endl;
-        cout << "Selecciona una opció: " << endl;
+        cout << "Selecciona una opcio: " << endl;
     }
     
     void dificutat() {
@@ -28,7 +28,7 @@ public:
         cout << "2- Mitja" << endl;
         cout << "3- Dificil" << endl;
         cout << endl;
-        cout << "Selecciona una opció: " << endl;
+        cout << "Selecciona una opcio: " << endl;
     }
     void nom() {
         cout << "=====================" << endl;

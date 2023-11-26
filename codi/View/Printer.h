@@ -31,8 +31,8 @@ public:
 
     void missatgePartida(int flags, int punts) {
         cout << "Flags disponibles: " << flags << endl;
-        cout << "Puntuació: " << punts << " punts" << endl << endl;
-        cout << "Introdueix una instrucció: ";
+        cout << "Puntuacio: " << punts << " punts" << endl << endl;
+        cout << "Introdueix una instruccio: ";
     }
     
     void finalPartida(bool abandonat, bool victoria, int punts) {
@@ -40,10 +40,10 @@ public:
             cout << "SORTINT DEL JOC" << endl;
         } else {
             if (victoria) {
-                cout << "HAS GUANYAT AMB UNA PUNTUACIÓ DE " << punts << " PUNTS" << endl;
+                cout << "HAS GUANYAT AMB UNA PUNTUACIO DE " << punts << " PUNTS" << endl;
             }
             else {
-                cout << "HAS PERDUT AMB UNA PUNTUACIÓ DE " << punts << " PUNTS" << endl;
+                cout << "HAS PERDUT AMB UNA PUNTUACIO DE " << punts << " PUNTS" << endl;
             }
         }
     }
