@@ -46,6 +46,34 @@ public:
         Assert::AreEqual(tauler->getAmplada(), 6);
         Assert::AreEqual(tauler->getMines(), 7);
 	}
+    TEST_METHOD(test_getCharMatriu)
+    {
+        Game partida(1, "nom");
+
+        char a = partida.getCharMatriu(false, false, true, 2);
+        Assert::AreEqual('F', a);
+
+        a = partida.getCharMatriu(false, true, false, 0);
+        Assert::AreEqual('0', a);
+        
+        a = partida.getCharMatriu(true, false, false, 2);
+        Assert::AreEqual('E', a);
+
+        a = partida.getCharMatriu(true, true, true, -1);
+        Assert::AreEqual('E', a);
+
+        a = partida.getCharMatriu(false, false, false, -1);
+        Assert::AreEqual('E', a);
+        
+        a = partida.getCharMatriu(true, true, false, 0);
+        Assert::AreEqual('X', a);
+        
+        a = partida.getCharMatriu(true, false, true, 0);
+        Assert::AreEqual('F', a);
+        
+        a = partida.getCharMatriu(true, true, false, 2);
+        Assert::AreEqual('E', a);
+    }
     TEST_METHOD(test_printMatriu)
     {
         vector<vector<Cell>> matriu = {

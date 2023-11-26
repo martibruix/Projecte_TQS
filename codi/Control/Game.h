@@ -92,6 +92,26 @@ public:
             return 0;
         return -1;
     }
+
+    char getCharMatriu(bool mina, bool oberta, bool flag, int subjacents) {
+        if (subjacents < 0 || subjacents > 8)
+            return 'E';
+        if (oberta && flag)
+            return 'E';
+        if (mina && subjacents > 0)
+            return 'E';
+        if (flag)
+            return 'F';
+        else if (!oberta)
+            return ' ';
+        else if (mina)
+            return 'X';
+        else {
+            string aux = to_string(subjacents);
+            return *aux.c_str();
+        }
+    }
+    
     vector<vector<char>> printMatriu(){
         vector<vector<char>> matriuFinal;
         matriuFinal.resize(tauler->getAltura());
@@ -101,16 +121,7 @@ public:
         vector<vector<Cell>> matriuBoard = tauler->getMatriu();
         for (int i = 0; i < matriuFinal.size(); i++) {
             for (int j = 0; j < matriuFinal[i].size(); j++) {
-                if (matriuBoard[i][j].teFlag())
-                    matriuFinal[i][j] = 'F';
-                else if (!matriuBoard[i][j].estaOberta())
-                    matriuFinal[i][j] = ' ';
-                else if (matriuBoard[i][j].esMina())
-                    matriuFinal[i][j] = 'X';
-                else {
-                    string aux = to_string(matriuBoard[i][j].getSubjacents());
-                    matriuFinal[i][j] = *aux.c_str();
-                }
+                matriuFinal[i][j] = getCharMatriu(matriuBoard[i][j].esMina(), matriuBoard[i][j].estaOberta(), matriuBoard[i][j].teFlag(), matriuBoard[i][j].getSubjacents());
             }
         }
 
