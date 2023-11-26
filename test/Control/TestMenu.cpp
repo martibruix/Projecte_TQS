@@ -3,23 +3,69 @@
 #include <sstream>
 #include <cstdio>
 #include "../../codi/Control/Menu.h"
+#include "MockGame.h"
+#include "MockInputGame.h"
+#include "MockInputMenu.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 TEST_CLASS(TestMenu)
 {
 public:
+	TEST_METHOD(test_iniciar)
+	{
+		vector<vector<Cell>> matriu = {
+			{Cell(1, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(1, 0, 0, 0)},
+			{Cell(0, 0, 0, 2), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 3), Cell(0, 0, 0, 1), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 2), Cell(1, 0, 0, 0), Cell(0, 0, 0, 3), Cell(1, 0, 0, 0), Cell(0, 0, 0, 2), Cell(1, 0, 0, 0)},
+			{Cell(0, 0, 0, 1), Cell(0, 0, 0, 2), Cell(0, 0, 0, 3), Cell(0, 0, 0, 2), Cell(0, 0, 0, 2), Cell(0, 0, 0, 1)},
+			{Cell(0, 0, 0, 0), Cell(0, 0, 0, 1), Cell(1, 0, 0, 0), Cell(0, 0, 0, 1), Cell(0, 0, 0, 0), Cell(0, 0, 0, 0)}
+		};
+
+		vector<vector<int>> instruccionsVictoria = {{0, 0, 1}, {0, 0, 2}, {0, 0, 3}, {0, 0, 4}, {0, 1, 0},
+			{0, 1, 1}, {0, 1, 2}, {0, 1, 3}, {0, 1, 4}, {0, 1, 5}, {0, 2, 0}, {0, 2, 2}, {0, 2, 3},
+			{0, 2, 4}, {0, 2, 5}, {0, 3, 0}, {0, 3, 2}, {0, 3, 4}, {0, 4, 0}, {0, 4, 1}, {0, 4, 2},
+			{0, 4, 3}, {0, 4, 4}, {0, 4, 5}, {0, 5, 0}, {0, 5, 1}, {0, 5, 3}, {0, 5, 4}, {0, 5, 5}};
+		MockInputGame mockInputGameVictoria(instruccionsVictoria);
+		MockGame mockPartidaVictoria(1, "nom", mockInputGameVictoria, matriu);
+
+		vector<vector<int>> instruccionsDerrota = { {0, 0, 0} };
+		MockInputGame mockInputGameDerrota(instruccionsDerrota);
+		MockGame mockPartidaDerrota(1, "nom", mockInputGameDerrota, matriu);
+
+		vector<vector<int>> instruccionsSortir = { {3} };
+		MockInputGame mockInputGameSortir(instruccionsSortir);
+		MockGame mockPartidaSortir(1, "nom", mockInputGameSortir, matriu);
+
+		vector<Game*> partides = { &mockPartidaVictoria, &mockPartidaDerrota, &mockPartidaSortir };
+		MockInputMenu mockInputMenu;
+		string path = "../../files/RankingTest.txt";
+
+		ofstream file(path, ios::trunc);
+		file.close();
+
+		Menu menu(mockInputMenu, partides, path);
+		menu.iniciar();
+
+		ifstream file2(path);
+		string linia;
+		getline(file2, linia);
+		Assert::AreEqual(string("nom 1 290 1"), linia);
+		getline(file2, linia);
+		Assert::AreEqual(string("nom 0 0 1"), linia);
+		file2.close();
+	}
 	TEST_METHOD(test_guardarPuntuacio)
 	{
 		string path = "../../files/RankingTest.txt";
-		ofstream file;
-		file.open(path);
-		
+		ofstream file(path, ios::trunc);
+		file.close();
+
 		Menu menu;
 		string nom, resultat, puntuacio, dificultat;
 		
 		menu.guardarPuntuacio("nom1", 1, 290, 1, path);
-		file.close();
 		string linea;
 		ifstream file2(path);
 		getline(file2, linea);
@@ -57,14 +103,12 @@ public:
 		Assert::AreEqual(string("150"), puntuacio);
 		Assert::AreEqual(string("2"), dificultat);
 		file2.close();
-
-		remove(path.c_str());
 	}
 	TEST_METHOD(test_llegirRanking)
 	{
 		string path = "../../files/RankingTest.txt";
-		ofstream file;
-		file.open(path);
+		ofstream file(path, ios::trunc);
+		file.close();
 
 		Menu menu;
 		menu.guardarPuntuacio("nom1", 1, 290, 1, path);
@@ -84,7 +128,5 @@ public:
 		Assert::AreEqual(string("0"), ranking[2][1]);
 		Assert::AreEqual(string("30"), ranking[2][2]);
 		Assert::AreEqual(string("3"), ranking[2][3]);
-		file.close();
-		remove(path.c_str());
 	}
 };

@@ -1,3 +1,4 @@
+#pragma once
 #include "../Model/Board.h"
 #include <string>
 #include "../View/InputGame.h"
@@ -45,7 +46,7 @@ public:
         }
         inputGame = &input;
     }
-    void initTauler() {
+    virtual void initTauler() {
         tauler->crearMines();
         tauler->calculSubjacents();
     }
@@ -83,7 +84,8 @@ public:
         printer.netejaPantalla();
         printer.tauler(printMatriu());
         printer.finalPartida(sortir, victoria, puntuacio);
-        
+        inputGame->espera();
+
         if (victoria)
             return 1;
         if (mort)

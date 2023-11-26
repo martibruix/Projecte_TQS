@@ -7,20 +7,25 @@ using namespace std;
 class Ranking
 {
 public:
-	void Registre() {
-        cout << "Introdueix el teu nom per registrarlo en el ranking: " << endl;
-    }
-    void MostraRanking(vector<vector<string>> ranking) {
+    void mostraRanking(vector<vector<string>> ranking) {
         cout << "==================" << endl;
         cout << "RANKING BUSCAMINES" << endl;
         cout << "==================" << endl;
-        cout << "JUGADOR" << setw(30) << "PUNTUACIO" << setw(10) << "VICTORIES" << endl;
-        /*printf("%-40s %-10s %-30s", "JUGADOR", "PUNTUACIO", "VICTORIES");*/
-        cout << endl;
-        for (vector<string> jugador : ranking) {
-            printf("%-40s %-10s %-30s", jugador[0].c_str(), jugador[1].c_str(), jugador[2].c_str());
-            cout << endl;
+        cout << "JUGADOR" << setw(20) << "RESULTAT" << setw(15) << "PUNTUACIO" << setw(15) << "DIFICULTAT" << endl;
+        for (int i = 0; i < ranking.size(); i++) {
+            string resultat, dificultat;
+            if (ranking[i][1] == "1")
+                resultat = "VICTORIA";
+            else
+                resultat = "DERROTA";
+            if (ranking[i][3] == "1")
+                dificultat = "FACIL";
+            else if (ranking[i][3] == "2")
+                dificultat = "MITJA";
+            else
+                dificultat = "DIFICIL";
+
+            cout << ranking[i][0] << setw(20) << resultat << setw(15) << ranking[i][2] << setw(15) << dificultat << endl;
         }
-        cout << endl;
     }
 };

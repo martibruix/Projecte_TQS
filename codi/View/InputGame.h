@@ -70,4 +70,10 @@ public:
 
 		return instruccio;
 	}
+	
+	virtual void espera() {
+		cout << endl << endl << "Prem Enter per continuar" << endl;
+		char a;
+		cin.get(a);
+	}
 };

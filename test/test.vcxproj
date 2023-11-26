@@ -167,7 +167,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Control\MockGame.h" />
     <ClInclude Include="Control\MockInputGame.h" />
+    <ClInclude Include="Control\MockInputMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

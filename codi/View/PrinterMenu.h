@@ -25,9 +25,17 @@ public:
         cout << "==========" << endl;
         cout << endl;
         cout << "1- Facil" << endl;
-        cout << "2- Intermig" << endl;
+        cout << "2- Mitja" << endl;
         cout << "3- Dificil" << endl;
         cout << endl;
         cout << "Selecciona una opció: " << endl;
+    }
+    void nom() {
+        cout << "=====================" << endl;
+        cout << "INTRODUEIX EL TEU NOM" << endl;
+        cout << "=====================" << endl;
+    }
+    void netejaPantalla() {
+        system("cls");
     }
 };

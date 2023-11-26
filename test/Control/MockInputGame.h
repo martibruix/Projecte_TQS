@@ -16,6 +16,7 @@ public:
 		index++;
 		return instruccio;
 	}
+	void espera() override {}
 private:
 	vector<vector<int>> instruccions;
 	int index;
