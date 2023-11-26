@@ -127,9 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Control\Game.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Model\Board.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Control\Game.h" />
