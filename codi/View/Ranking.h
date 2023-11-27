@@ -7,6 +7,8 @@ using namespace std;
 class Ranking
 {
 public:
+    //Ens permet tindre l'estructura i la vista del ranking de les puntuacions, a més de la transformació en paraules tant
+    //del resultat de la partida (GUANYAT o PERDUT) i de la dificultat (FACIL, MITJA, DIFICIL)
     void mostraRanking(vector<vector<string>> ranking) {
         cout << "==================" << endl;
         cout << "RANKING BUSCAMINES" << endl;
